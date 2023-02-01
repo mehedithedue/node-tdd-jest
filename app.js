@@ -20,8 +20,9 @@ app.get("/", (req, res) => {
 
 app.use("/todos", todoRouter);
 
-app.listen(process.env.PORT || 3000, ()=>{
-  console.log("server is running");
-})
+app.use((error, req, res, next) => {
+  res.status(500).json({ message: error.message });
+});
+
 
 module.exports = app;
